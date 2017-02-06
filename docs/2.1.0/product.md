@@ -221,6 +221,7 @@ Content-Type: application/json;charset=UTF-8
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
 <a name="get_product"></a>
+
 ### `GET`{:.http-get} Listagem de Produtos
 -------------------------------------------------
 
