@@ -27,6 +27,7 @@ Manufacturer.Model | Modelo do produto  | `string`{:.custom-tag}  `64`{:.custom-
 Skus | Lista de SKUs do produto  | `array`{:.custom-tag}  `opcional`{:.custom-tag}  
 
 <a name="http_operations"></a>
+
 ## Operações HTTP
 -----------------------------------
 
@@ -39,6 +40,7 @@ Verbo | Path | Descrição |
   
 
 <a name="post_product"></a>
+
 ### `POST`{:.http-post} Criação de Produto 
 -------------------------------------------
 
@@ -85,6 +87,7 @@ Content-Type: application/json;charset=UTF-8
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
 <a name="put_product"></a>
+
 ### `PUT`{:.http-put} Atualização de Produto 
 -------------------------------------------
   
@@ -137,6 +140,7 @@ Content-Type: application/json;charset=UTF-8
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
 <a name="getbyid_product"></a>
+
 ### `GET`{:.http-get} Obtenção de Produto por Id
 -------------------------------------------------
 
