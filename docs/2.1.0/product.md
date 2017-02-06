@@ -5,9 +5,11 @@ previous: /docs/2.1.0/oauth
 next: /docs/2.1.0/shopper
 ---
 ---
-Última Atualização: `05/02/2017`{:.custom-highlight}  
-
+  
 Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos e respectivos SKUs.  
+  
+  
+<a name="attributes_product"></a>
   
 ## Atributos do objeto
 -----------------------------------
@@ -25,6 +27,8 @@ Manufacturer.Name | Fabricante  | `string`{:.custom-tag}  `64`{:.custom-tag}  `o
 Manufacturer.Warranty | Garantia do produto (em meses)  |  `int`{:.custom-tag}  `opcional`{:.custom-tag}  
 Manufacturer.Model | Modelo do produto  | `string`{:.custom-tag}  `64`{:.custom-tag}  `opcional`{:.custom-tag}  
 Skus | Lista de SKUs do produto  | `array`{:.custom-tag}  `opcional`{:.custom-tag}  
+  
+<a style="float: right;" href="#attributes_product"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
 <a name="http_operations"></a>
 
@@ -244,3 +248,5 @@ Content-Type: application/json;charset=UTF-8
 ```
   
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
+  
+
