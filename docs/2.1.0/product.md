@@ -14,19 +14,39 @@ Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos e 
 ## Atributos do objeto
 -----------------------------------
 
-Atributo | Descrição | 
------------- | -------------
-Id | Identificador do produto  | `int`{:.custom-tag}  
-CreatedOn | Data da criação  | `datetime`{:.custom-tag}  
-UpdatedOn | Data da última atualização  | `datetime`{:.custom-tag}  
-MerchantId | Identificador da loja  | `guid`{:.custom-tag}  
-Name | Nome do produto  | `string`{:.custom-tag}  `256`{:.custom-tag} 
-Description | Descrição do produto  | `string`{:.custom-tag}  `2048`{:.custom-tag} 
-IsEnabled | Flag que indica se produto está habilitado  | `bool`{:.custom-tag}  
-Manufacturer.Name | Fabricante  | `string`{:.custom-tag}  `64`{:.custom-tag}  `opcional`{:.custom-tag}  
-Manufacturer.Warranty | Garantia do produto (em meses)  |  `int`{:.custom-tag}  `opcional`{:.custom-tag}  
-Manufacturer.Model | Modelo do produto  | `string`{:.custom-tag}  `64`{:.custom-tag}  `opcional`{:.custom-tag}  
-Skus | Lista de SKUs do produto  | `array`{:.custom-tag}  `opcional`{:.custom-tag}  
+**Id**{:.custom-attrib}  `int`{:.custom-tag}  
+Identificador do produto.  
+
+**CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data da criação do objeto  
+
+**UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data da última atualização do objeto
+
+**MerchantId**{:.custom-attrib}  `guid`{:.custom-tag}  
+Identificador da loja
+
+**Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
+Nome do produto
+
+**Description**{:.custom-attrib}  `2048`{:.custom-tag}  `string`{:.custom-tag}  
+Descrição do produto
+
+**IsEnabled**{:.custom-attrib}  `bool`{:.custom-tag}  
+Flag que indica se produto está habilitado
+
+**Manufacturer.Name**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
+Fabricante do produto
+
+**Manufacturer.Model**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
+Modelo do produto  
+
+**Manufacturer.Warranty**{:.custom-attrib}  `opcional`{:.custom-tag}  `int`{:.custom-tag}  
+Garantia do produto (em meses)  
+
+**Skus**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
+Lista de SKUs do produto  
+  
   
 <a style="float: right;" href="#attributes_product"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
