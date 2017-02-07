@@ -123,6 +123,12 @@
     }
 }
 
+.hide {
+    @media screen and (min-width: $mainnav-collapse) {
+        display: none;
+    }
+}
+
 .dropdown-content {
     @include shadow(1);
     background-color: #FFFFFF;
