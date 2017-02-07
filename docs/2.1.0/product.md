@@ -8,6 +8,7 @@ next: /docs/2.1.0/shopper
   
 Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos e respectivos SKUs.  
   
+  ola
   
 <a name="attributes_product"></a>
   
