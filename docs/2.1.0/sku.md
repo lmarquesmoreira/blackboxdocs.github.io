@@ -1,51 +1,82 @@
 ---
 layout: page-classic-sidebar-left
-title: Produto
-previous: /docs/2.1.0/oauth
-next: /docs/2.1.0/sku
+title: SKU
+previous: /docs/2.1.0/product
+next: 
 ---
 ---
 
-Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos e respectivos SKUs.  
+SKUs são gerenciados pelo `VENDEDOR`{:.custom-highlight} e representam uma variação específica de produto, como tamanho, cor ou sabor. 
 
-  
+ 
 <a name="attributes"></a>
   
 ## Atributos do objeto
 -----------------------------------
 
 **Id**{:.custom-attrib}  `int`{:.custom-tag}  
-Identificador do produto.  
+Identificador do SKU  
+
+**Sku**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
+Valor do SKU
 
 **CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da criação do objeto  
+Data da criação do objeto
 
 **UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
 Data da última atualização do objeto
 
-**MerchantId**{:.custom-attrib}  `guid`{:.custom-tag}  
-Identificador da loja
+**Status**{:.custom-attrib}  `int`{:.custom-tag}  
+Status do SKU no estoque. Valores possíveis: (0) em estoque, (1) sem estoque, (2) sob demanda, (3) descontinuado
 
 **Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
-Nome do produto
+Nome do SKU
 
 **Description**{:.custom-attrib}  `2048`{:.custom-tag}  `string`{:.custom-tag}  
-Descrição do produto
+Descrição do SKU
 
-**IsEnabled**{:.custom-attrib}  `bool`{:.custom-tag}  
-Flag que indica se produto está habilitado
+**ImageUrl**{:.custom-attrib}  `opcional`{:.custom-tag}  `256`{:.custom-tag}  `string`{:.custom-tag}  
+URL para a imagem do SKU
 
-**Manufacturer.Name**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
-Fabricante do produto
+**Inventory.UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data da última atualização do SKU no inventório
 
-**Manufacturer.Model**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
-Modelo do produto  
+**Inventory.Quantity**{:.custom-attrib}  `int`{:.custom-tag}  
+Quantidade de itens disponíveis no inventório  
 
-**Manufacturer.Warranty**{:.custom-attrib}  `opcional`{:.custom-tag}  `int`{:.custom-tag}  
-Garantia do produto (em meses)  
+**Inventory.Type**{:.custom-attrib}  `int`{:.custom-tag}  
+Tipo de estoque. Valores possíveis: (0) Finito, (1) Infinito  
 
-**Skus**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
-Lista de SKUs do produto  
+**Dimensions.Weight**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+Peso do item (em gramas)  
+
+**Dimensions.Height**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+Altura do item (em centímetros)  
+
+**Dimensions.Lenght**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+Comprimento do item (em centímetros)  
+
+**Dimensions.Width**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+Largura do item  (em centímetros)  
+
+**ListPrice.CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data de criação do preço de tabela  
+
+**ListPrice.Amount**{:.custom-attrib}  `int`{:.custom-tag}  
+Valor em centavos do preço de tabela. Exemplo: 150 (1,50)  
+
+**ListPrice.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
+Código ISO 4217 da moeda utilizada no preço de tabela. Exemplos: BRL, USD, EUR  
+
+**SellPrice.CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data de criação do preço de venda  
+
+**SellPrice.Amount**{:.custom-attrib}  `int`{:.custom-tag}  
+Valor em centavos do preço de venda. Exemplo: 150 (1,50)  
+
+**SellPrice.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
+Código ISO 4217 da moeda utilizada no preço de venda. Exemplos: BRL, USD, EUR  
+
   
 <a style="float: right;" href="#attributes"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
@@ -54,14 +85,17 @@ Lista de SKUs do produto
 ## Operações HTTP
 -----------------------------------
 
-`POST`{:.http-post} [/api/product/](#post_product){:.custom-attrib}  
-Criação de produto  
+`POST`{:.http-post} [/api/product/{productId}/sku](#post_sku){:.custom-attrib}  
+Criação de SKU para o produto {productId}  
 
-`PUT`{:.http-put} [/api/product/{productId}](#put_product){:.custom-attrib}  
-Atualização de produto  
+`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}](#put_sku){:.custom-attrib}  
+Atualização de SKU {skuId} para o produto {productId}  
 
-`GET`{:.http-get} [/api/product/{productId}](#getbyid_product){:.custom-attrib}  
-Obtenção de Produto por Id  
+`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}](#getbyid_sku){:.custom-attrib}  
+Obtenção de SKU do produto {productId} por Id
+
+`GET`{:.http-get} [/api/product/{productId}/sku](#get_sku){:.custom-attrib}  
+Listagem dos SKUs do produto {productId}  
 
 `GET`{:.http-get} [/api/product/](#get_product){:.custom-attrib}  
 Listagem de Produtos  
@@ -275,4 +309,3 @@ Content-Type: application/json;charset=UTF-8
   
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
-
