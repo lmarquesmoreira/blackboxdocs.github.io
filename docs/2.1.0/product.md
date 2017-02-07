@@ -47,7 +47,6 @@ Garantia do produto (em meses)
 **Skus**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
 Lista de SKUs do produto  
   
-  
 <a style="float: right;" href="#attributes_product"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
 <a name="http_operations"></a>
@@ -55,17 +54,23 @@ Lista de SKUs do produto
 ## Operações HTTP
 -----------------------------------
 
-Verbo | Path | Descrição | 
------------- | ------------- | -------------
-`POST`{:.http-post} | [/api/product/](#post_product) | Criação de produto  | 
-`PUT`{:.http-put} | [/api/product/{productId}](#put_product) | Atualização de produto  | 
-`GET`{:.http-get} | [/api/product/{productId}](#getbyid_product) | Obtenção de Produto por Id  | 
-`GET`{:.http-get} | [/api/product/](#get_product) | Listagem de Produtos  | 
-  
+`POST`{:.http-post} [/api/product/](#post_product){:.custom-attrib}  
+Criação de produto  
+
+`PUT`{:.http-put} [/api/product/{productId}](#put_product){:.custom-attrib}  
+Atualização de produto  
+
+`GET`{:.http-get} [/api/product/{productId}](#getbyid_product){:.custom-attrib}  
+Obtenção de Produto por Id  
+
+`GET`{:.http-get} [/api/product/](#get_product){:.custom-attrib}  
+Listagem de Produtos  
+
+<a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
 <a name="post_product"></a>
 
-### `POST`{:.http-post} Criação de Produto 
+#### `POST`{:.http-post} Criação de Produto 
 -------------------------------------------
 
 **REQUEST:**  
@@ -112,7 +117,7 @@ Content-Type: application/json;charset=UTF-8
   
 <a name="put_product"></a>
 
-### `PUT`{:.http-put} Atualização de Produto 
+#### `PUT`{:.http-put} Atualização de Produto 
 -------------------------------------------
   
 **PARÂMETROS:**  
@@ -165,7 +170,7 @@ Content-Type: application/json;charset=UTF-8
   
 <a name="getbyid_product"></a>
 
-### `GET`{:.http-get} Obtenção de Produto por Id
+#### `GET`{:.http-get} Obtenção de Produto por Id
 -------------------------------------------------
 
 **PARÂMETROS:**  
@@ -242,7 +247,7 @@ Content-Type: application/json;charset=UTF-8
   
 <a name="get_product"></a>
 
-### `GET`{:.http-get} Listagem de Produtos
+#### `GET`{:.http-get} Listagem de Produtos
 -------------------------------------------------
 
 **REQUEST:**  
