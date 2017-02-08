@@ -6,9 +6,9 @@ next:
 ---
 ---
 
-SKUs são gerenciados pelo `VENDEDOR`{:.custom-highlight} e representam uma variação específica de produto, como tamanho, cor ou sabor. 
+SKUs são gerenciados pelo `VENDEDOR`{:.custom-highlight} e representam uma variação específica do [produto]({{ site.baseurl }}{% link docs/2.1.0/product.md %}), como tamanho, cor ou sabor. Cada produto possui ao menos um SKU.  
 
- 
+  
 <a name="attributes"></a>
   
 ## Atributos do objeto
@@ -18,7 +18,7 @@ SKUs são gerenciados pelo `VENDEDOR`{:.custom-highlight} e representam uma vari
 Identificador do SKU  
 
 **Sku**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
-Valor do SKU
+Valor do SKU (Stock Keeping Unit)
 
 **CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
 Data da criação do objeto
@@ -97,20 +97,41 @@ Obtenção de SKU do produto {productId} por Id
 `GET`{:.http-get} [/api/product/{productId}/sku](#get_sku){:.custom-attrib}  
 Listagem dos SKUs do produto {productId}  
 
-`GET`{:.http-get} [/api/product/](#get_product){:.custom-attrib}  
-Listagem de Produtos  
+`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}/inventory](#put_inventory){:.custom-attrib}  
+Atualização de estoque para o SKU {skuId} do produto {productId}  
+
+`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/inventory](#get_inventory){:.custom-attrib}  
+Obtenção de estoque do SKU {skuId}  
+
+`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}/listprice](#put_listprice){:.custom-attrib}  
+Atualização do preço de tabela do SKU {skuId}  
+
+`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/listprice](#get_listprice){:.custom-attrib}  
+Obtenção do preço de tabela do SKU {skuId}  
+
+`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}/sellprice](#put_sellprice){:.custom-attrib}  
+Atualização do preço de venda do SKU {skuId}  
+
+`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/sellprice](#get_sellprice){:.custom-attrib}  
+Obtenção do preço de venda do SKU {skuId}  
 
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
-<a name="post_product"></a>
+<a name="post_sku"></a>
 
-#### `POST`{:.http-post} Criação de Produto 
--------------------------------------------
+#### `POST`{:.http-post} Criação de SKU  
+-----------------------------------------
+
+**PARÂMETROS:**  
+
+``` csharp
+productId: int  // id do produto
+```
 
 **REQUEST:**  
 
 ``` http
-POST /api/product/ HTTP/1.1
+POST /api/product/{productId}/sku HTTP/1.1
 Host: {blackbox endpoint}
 Authorization: Bearer {access_token}
 Content-Type: application/json
@@ -118,14 +139,22 @@ Content-Type: application/json
 
 ``` json
 {
-  "MerchantId": "99999999-9999-9999-9999-999999999999",
-  "Name": "Nome do produto",
-  "Description": "Descrição do produto",
-  "Manufacturer": {
-    "Name": "Fabricante do produto", 
-    "Warranty": 12,
-    "Model": "MODEL0001"
-  }
+  "Sku": "PROD9999",
+  "Name": "SKU COR AZUL",
+  "Description": "Descrição do SKU de Produto",
+    "Status": 0,
+    "Inventory": {
+      "Quantity": 10,
+      "Type": 0
+    },
+    "ListPrice": {
+      "Currency": "BRL",
+      "Amount" : 1000
+    },
+    "SellPrice": {
+      "Currency": "BRL",
+      "Amount" : 999
+    }
 }
 ```
 
@@ -140,7 +169,7 @@ Content-Type: application/json;charset=UTF-8
   "Id": 9999,
   "Links": {
     "self": {
-      "href": "/api/product/9999",
+      "href": "/api/product/{productId}/sku/9999",
       "method": "GET"
     }
   }
@@ -149,21 +178,22 @@ Content-Type: application/json;charset=UTF-8
   
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
-<a name="put_product"></a>
+<a name="put_sku"></a>
 
-#### `PUT`{:.http-put} Atualização de Produto 
+#### `PUT`{:.http-put} Atualização de SKU 
 -------------------------------------------
   
 **PARÂMETROS:**  
 
 ``` csharp
 productId: int  // id do produto
+skuId: int  // id do sku
 ```
 
 **REQUEST:**  
 
 ``` http
-PUT /api/product/{productId} HTTP/1.1
+PUT /api/product/{productId}/sku/{skuId} HTTP/1.1
 Host: {blackbox endpoint}
 Authorization: Bearer {access_token}
 Content-Type: application/json
@@ -171,14 +201,17 @@ Content-Type: application/json
 
 ``` json
 {
-  "MerchantId": "99999999-9999-9999-9999-999999999999",
-  "Name": "Nome do produto",
-  "Description": "Descrição do produto",
-  "Manufacturer": {
-    "Name": "Fabricante do produto", 
-    "Warranty": 12,  
-    "Model": "MODEL0001" 
-  }
+  "Sku": "PROD9999",
+  "Name": "SKU COR AZUL ESCURO",
+  "Description": "Nova descrição do sku do produto",
+  "ImageUrl": "http://path.to/skuimage.png",
+  "Status": 0,
+  "Dimensions": {
+      "Weight": 1.5,
+      "Height": 2.0,
+      "Lenght": 3.2,
+      "Width": 2.0
+    }
 }
 ```
 
@@ -193,7 +226,7 @@ Content-Type: application/json;charset=UTF-8
   "Id": 9999,
   "Links": {
     "self": {
-      "href": "/api/product/9999",
+      "href": "/api/product/{productId}/sku/9999",
       "method": "GET"
     }
   }
@@ -202,21 +235,22 @@ Content-Type: application/json;charset=UTF-8
   
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
-<a name="getbyid_product"></a>
+<a name="getbyid_sku"></a>
 
-#### `GET`{:.http-get} Obtenção de Produto por Id
+#### `GET`{:.http-get} Obtenção de SKU por Id
 -------------------------------------------------
 
 **PARÂMETROS:**  
 
 ``` csharp
-productId: int  // id do produto
+productId: int  // id do produto  
+skuId: int  // id do sku  
 ```
 
 **REQUEST:**  
 
 ``` http
-GET /api/product/{productId} HTTP/1.1
+GET /api/product/{productId}/sku/{skuId} HTTP/1.1
 Host: {blackbox endpoint}
 Authorization: Bearer {access_token}
 Content-Type: application/json
@@ -231,63 +265,53 @@ Content-Type: application/json;charset=UTF-8
 ``` json
 {
   "Id": 9999,
-  "CreatedOn": "2017-01-23T09:44:13.3466667",
-  "UpdatedOn": "2017-01-23T09:44:13.3466667",
-  "MerchantId": "99999999-9999-9999-9999-999999999999",
-  "Name": "Nome do produto",
-  "Description": "Descrição do produto",
-  "Manufacturer": {
-    "Name": "Fabricante do produto",
-    "Warranty": 12,
-    "Model": "MODEL0001"
+  "Sku": "PROD9999",
+  "CreatedOn": "2017-02-08T08:53:23.9112582",
+  "UpdatedOn": "2017-02-08T08:53:24.292862",
+  "Status": 0,
+  "Name": "SKU COR AZUL",
+  "Description": "Descrição do SKU de Produto",
+  "Inventory": {
+    "UpdatedOn": "2017-02-08T08:53:23.9112582",
+    "Quantity": 10,
+    "Type": 0
   },
-  "IsEnabled": true,
-  "Skus": [
-    {
-      "Id": 9999999,
-      "Sku": "PROD9999",
-      "CreatedOn": "2017-01-23T09:44:15.16",
-      "UpdatedOn": "2017-01-23T09:44:15.16",
-      "Status": 0,
-      "Name": "SKU PROD9999",
-      "Description": "Descrição do item",
-      "Inventory": {
-        "UpdatedOn": "2017-01-23T09:44:14.66",
-        "Quantity": 100,
-        "Type": 0
-      },
-      "Dimensions": {
-        "Weight": 1.0,
-        "Height": 2.5,
-        "Lenght": 2.5,
-        "Width": 10
-      },
-      "ListPrice": {
-        "CreatedOn": "2017-01-23T09:44:13.97",
-        "Amount": 10000,
-        "Currency": "BRL"
-      },
-      "SellPrice": {
-        "CreatedOn": "2017-01-23T09:44:14.16",
-        "Amount": 9000,
-        "Currency": "BRL"
-      }
-    }
-  ]
+  "Dimensions": {
+      "Weight": 1.5,
+      "Height": 2.0,
+      "Lenght": 3.2,
+      "Width": 2.0
+  },
+  "ListPrice": {
+    "CreatedOn": "2017-02-08T08:53:23.9112582",
+    "Amount": 1000,
+    "Currency": "BRL"
+  },
+  "SellPrice": {
+    "CreatedOn": "2017-02-08T08:53:23.9112582",
+    "Amount": 999,
+    "Currency": "BRL"
+  }
 }
 ```
   
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
-<a name="get_product"></a>
+<a name="get_sku"></a>
 
-#### `GET`{:.http-get} Listagem de Produtos
--------------------------------------------------
+#### `GET`{:.http-get} Listagem de SKUs do Produto
+---------------------------------------------------
+  
+**PARÂMETROS:**  
+
+``` csharp
+productId: int  // id do produto  
+```
 
 **REQUEST:**  
 
 ``` http
-GET /api/product/ HTTP/1.1
+GET /api/product/{productId}/sku HTTP/1.1
 Host: {blackbox endpoint}
 Authorization: Bearer {access_token}
 Content-Type: application/json

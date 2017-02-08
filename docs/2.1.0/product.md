@@ -6,7 +6,7 @@ next: /docs/2.1.0/sku
 ---
 ---
 
-Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos e respectivos SKUs.  
+Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos. Cada produto possui uma coleção de [SKUs]({{ site.baseurl }}{% link docs/2.1.0/sku.md %}).  
 
   
 <a name="attributes"></a>
@@ -24,7 +24,7 @@ Data da criação do objeto
 Data da última atualização do objeto
 
 **MerchantId**{:.custom-attrib}  `guid`{:.custom-tag}  
-Identificador da loja
+Identificador da loja, composto por 36 caracteres no formato *99999999-9999-9999-9999-999999999999*  
 
 **Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
 Nome do produto
