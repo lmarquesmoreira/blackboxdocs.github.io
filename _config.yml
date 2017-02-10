@@ -1,5 +1,5 @@
 full_rebuild: true
-name: BlackBox
+name: BlackBox Docs
 description: Documentação da plataforma Braspag BlackBox
 destination: jekyllbuild
 url: #place url

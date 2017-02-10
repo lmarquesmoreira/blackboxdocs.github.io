@@ -11,10 +11,10 @@ Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos. C
   
 <a name="attributes"></a>
   
-## Atributos do objeto
+## Atributos  
 -----------------------------------
 
-**Id**{:.custom-attrib}  `int`{:.custom-tag}  
+**Id**{:.custom-attrib}  `number`{:.custom-tag}  
 Identificador do produto.  
 
 **CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
@@ -29,11 +29,20 @@ Identificador da loja, composto por 36 caracteres no formato *99999999-9999-9999
 **Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
 Nome do produto
 
-**Description**{:.custom-attrib}  `2048`{:.custom-tag}  `string`{:.custom-tag}  
-Descrição do produto
+**Caption**{:.custom-attrib}  `128`{:.custom-tag}  `string`{:.custom-tag}  
+Uma breve frase com a descrição do produto para exibição  
 
-**IsEnabled**{:.custom-attrib}  `bool`{:.custom-tag}  
-Flag que indica se produto está habilitado
+**Description**{:.custom-attrib}  `1024`{:.custom-tag}  `string`{:.custom-tag}  
+Descrição do produto  
+
+**IsEnabled**{:.custom-attrib}  `boolean`{:.custom-tag}  
+Flag que indica se produto está habilitado para publicação no marketplace  
+
+**DefaultSku**{:.custom-attrib}  `opcional`{:.custom-tag}  `32`{:.custom-tag}  `string`{:.custom-tag}  
+SKU padrão para exibição na *user interface*  
+
+**Metadata**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
+Conjunto de pares chave-valor para armazenar informações adicionais sobre o produto  
 
 **Manufacturer.Name**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
 Fabricante do produto
@@ -41,11 +50,11 @@ Fabricante do produto
 **Manufacturer.Model**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
 Modelo do produto  
 
-**Manufacturer.Warranty**{:.custom-attrib}  `opcional`{:.custom-tag}  `int`{:.custom-tag}  
+**Manufacturer.Warranty**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
 Garantia do produto (em meses)  
 
 **Skus**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
-Lista de SKUs do produto  
+Lista de [SKUs]({{ site.baseurl }}{% link docs/2.1.0/sku.md %}) do produto  
   
 <a style="float: right;" href="#attributes"><i class="fa fa-angle-double-up fa-fw"></i></a>
 

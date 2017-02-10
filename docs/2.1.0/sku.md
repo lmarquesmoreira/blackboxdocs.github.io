@@ -6,75 +6,81 @@ next:
 ---
 ---
 
-SKUs são gerenciados pelo `VENDEDOR`{:.custom-highlight} e representam uma variação específica do [produto]({{ site.baseurl }}{% link docs/2.1.0/product.md %}), como tamanho, cor ou sabor. Cada produto possui ao menos um SKU.  
+SKUs, ou *Stock Keeping Units*, representam uma variação específica do [produto]({{ site.baseurl }}{% link docs/2.1.0/product.md %}), como tamanho, cor ou sabor. Cada produto deve possuir ao menos um SKU antes de ser publicado.   
 
   
 <a name="attributes"></a>
   
-## Atributos do objeto
+## Atributos  
 -----------------------------------
 
-**Id**{:.custom-attrib}  `int`{:.custom-tag}  
-Identificador do SKU  
+**Id**{:.custom-attrib}  `number`{:.custom-tag}  
+Identificador do SKU, gerado automáticamente durante a criação  
 
 **Sku**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
-Valor do SKU (Stock Keeping Unit)
-
-**CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da criação do objeto
+Valor do SKU  
 
 **UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da última atualização do objeto
+Data da última atualização  
 
-**Status**{:.custom-attrib}  `int`{:.custom-tag}  
-Status do SKU no estoque. Valores possíveis: (0) em estoque, (1) sem estoque, (2) sob demanda, (3) descontinuado
-
-**Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
-Nome do SKU
-
-**Description**{:.custom-attrib}  `2048`{:.custom-tag}  `string`{:.custom-tag}  
+**Description**{:.custom-attrib}  `opcional`{:.custom-tag}  `512`{:.custom-tag}  `string`{:.custom-tag}  
 Descrição do SKU
 
-**ImageUrl**{:.custom-attrib}  `opcional`{:.custom-tag}  `256`{:.custom-tag}  `string`{:.custom-tag}  
-URL para a imagem do SKU
+**Images**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
+Array com até 8 URLs de imagens para o SKU  
+
+**Attributes**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
+Conjunto de pares chave-valor para armazenar até 5 atributos ao SKU. Exemplo:  
+
+``` json
+{
+  "cor": "vermelho", 
+  "tamanho": "médio" 
+}
+```
+  
+**Inventory.Status**{:.custom-attrib}  `number`{:.custom-tag}  
+Estado do SKU no estoque. Os valores possíveis são:  
+
+``` javascript
+ 0 // em estoque  
+ 1 // fora de estoque  
+ 2 // aceito sob demanda  
+ 3 // descontinuado  
+```
+  
 
 **Inventory.UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
 Data da última atualização do SKU no inventório
 
-**Inventory.Quantity**{:.custom-attrib}  `int`{:.custom-tag}  
+**Inventory.Quantity**{:.custom-attrib}  `number`{:.custom-tag}  
 Quantidade de itens disponíveis no inventório  
 
-**Inventory.Type**{:.custom-attrib}  `int`{:.custom-tag}  
-Tipo de estoque. Valores possíveis: (0) Finito, (1) Infinito  
+**Inventory.Type**{:.custom-attrib}  `number`{:.custom-tag}  
+Tipo de estoque. Os valores possíveis são:  
 
-**Dimensions.Weight**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+``` javascript
+ 0 // finito  
+ 1 // infinito  
+```
+  
+
+**Dimensions.Weight**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
 Peso do item (em gramas)  
 
-**Dimensions.Height**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+**Dimensions.Height**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
 Altura do item (em centímetros)  
 
-**Dimensions.Lenght**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+**Dimensions.Lenght**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
 Comprimento do item (em centímetros)  
 
-**Dimensions.Width**{:.custom-attrib}  `opcional`{:.custom-tag}  `float`{:.custom-tag}  
+**Dimensions.Width**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
 Largura do item  (em centímetros)  
 
-**ListPrice.CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data de criação do preço de tabela  
-
-**ListPrice.Amount**{:.custom-attrib}  `int`{:.custom-tag}  
-Valor em centavos do preço de tabela. Exemplo: 150 (1,50)  
-
-**ListPrice.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
-Código ISO 4217 da moeda utilizada no preço de tabela. Exemplos: BRL, USD, EUR  
-
-**SellPrice.CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data de criação do preço de venda  
-
-**SellPrice.Amount**{:.custom-attrib}  `int`{:.custom-tag}  
+**Price.Amount**{:.custom-attrib}  `number`{:.custom-tag}  
 Valor em centavos do preço de venda. Exemplo: 150 (1,50)  
 
-**SellPrice.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
+**Price.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
 Código ISO 4217 da moeda utilizada no preço de venda. Exemplos: BRL, USD, EUR  
 
   
@@ -103,16 +109,10 @@ Atualização de estoque para o SKU {skuId} do produto {productId}
 `GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/inventory](#get_inventory){:.custom-attrib}  
 Obtenção de estoque do SKU {skuId}  
 
-`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}/listprice](#put_listprice){:.custom-attrib}  
-Atualização do preço de tabela do SKU {skuId}  
-
-`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/listprice](#get_listprice){:.custom-attrib}  
-Obtenção do preço de tabela do SKU {skuId}  
-
-`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}/sellprice](#put_sellprice){:.custom-attrib}  
+`PUT`{:.http-put} [/api/product/{productId}/sku/{skuId}/price](#put_price){:.custom-attrib}  
 Atualização do preço de venda do SKU {skuId}  
 
-`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/sellprice](#get_sellprice){:.custom-attrib}  
+`GET`{:.http-get} [/api/product/{productId}/sku/{skuId}/price](#get_price){:.custom-attrib}  
 Obtenção do preço de venda do SKU {skuId}  
 
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
