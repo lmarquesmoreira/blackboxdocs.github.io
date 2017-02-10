@@ -15,16 +15,20 @@ Permite ao `VENDEDOR`{:.custom-highlight} cadastrar e gerenciar seus produtos. C
 -----------------------------------
 
 **Id**{:.custom-attrib}  `number`{:.custom-tag}  
-Identificador do produto.  
+Identificador do produto (gerado automaticamente)  
 
 **CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da criação do objeto  
+Data da criação  
 
 **UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da última atualização do objeto
+Data da última atualização  
 
-**MerchantId**{:.custom-attrib}  `guid`{:.custom-tag}  
-Identificador da loja, composto por 36 caracteres no formato *99999999-9999-9999-9999-999999999999*  
+**MerchantId**{:.custom-attrib}  `36`{:.custom-tag}  `string`{:.custom-tag}  
+Identificador da loja   
+
+``` javascript
+ "99999999-9999-9999-9999-999999999999"
+```
 
 **Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
 Nome do produto
@@ -35,6 +39,13 @@ Uma breve frase com a descrição do produto para exibição
 **Description**{:.custom-attrib}  `1024`{:.custom-tag}  `string`{:.custom-tag}  
 Descrição do produto  
 
+**Permalink**{:.custom-attrib}  `string`{:.custom-tag}  
+Link de exibição do produto  
+
+```
+https://brasp.ag/product/9999
+```
+
 **IsEnabled**{:.custom-attrib}  `boolean`{:.custom-tag}  
 Flag que indica se produto está habilitado para publicação no marketplace  
 
@@ -43,6 +54,13 @@ SKU padrão para exibição na *user interface*
 
 **Metadata**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
 Conjunto de pares chave-valor para armazenar informações adicionais sobre o produto  
+
+``` json
+{
+    "id-local": "101020",
+    "categoria": "utilidades"
+}
+```
 
 **Manufacturer.Name**{:.custom-attrib}  `opcional`{:.custom-tag}  `64`{:.custom-tag}  `string`{:.custom-tag}  
 Fabricante do produto
@@ -86,8 +104,6 @@ Listagem de Produtos
 
 ``` http
 POST /api/product/ HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
@@ -95,7 +111,8 @@ Content-Type: application/json
 {
   "MerchantId": "99999999-9999-9999-9999-999999999999",
   "Name": "Nome do produto",
-  "Description": "Descrição do produto",
+  "Caption": "Uma breve descrição do produto",
+  "Description": "Descrição mais detalhada do produto",
   "Manufacturer": {
     "Name": "Fabricante do produto", 
     "Warranty": 12,
@@ -139,16 +156,19 @@ productId: int  // id do produto
 
 ``` http
 PUT /api/product/{productId} HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
 ``` json
 {
-  "MerchantId": "99999999-9999-9999-9999-999999999999",
   "Name": "Nome do produto",
   "Description": "Descrição do produto",
+  "Caption": "Uma breve descrição do produto",
+  "DefaultSku": "PROD9999",
+  "Metadata": {
+    "id-local": "101020",
+    "categoria": "utilidades"
+  },
   "Manufacturer": {
     "Name": "Fabricante do produto", 
     "Warranty": 12,  
@@ -192,8 +212,6 @@ productId: int  // id do produto
 
 ``` http
 GET /api/product/{productId} HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
@@ -210,24 +228,28 @@ Content-Type: application/json;charset=UTF-8
   "UpdatedOn": "2017-01-23T09:44:13.3466667",
   "MerchantId": "99999999-9999-9999-9999-999999999999",
   "Name": "Nome do produto",
-  "Description": "Descrição do produto",
+  "Caption": "Uma breve descrição do produto",
+  "Description": "Descrição mais detalhada do produto",
   "Manufacturer": {
     "Name": "Fabricante do produto",
     "Warranty": 12,
     "Model": "MODEL0001"
   },
+  "Metadata": {
+    "id-local": "101020",
+    "categoria": "utilidades"
+  },
   "IsEnabled": true,
+  "DefaultSku": "PROD9999",
   "Skus": [
     {
       "Id": 9999999,
       "Sku": "PROD9999",
-      "CreatedOn": "2017-01-23T09:44:15.16",
       "UpdatedOn": "2017-01-23T09:44:15.16",
-      "Status": 0,
-      "Name": "SKU PROD9999",
       "Description": "Descrição do item",
       "Inventory": {
         "UpdatedOn": "2017-01-23T09:44:14.66",
+        "Status": 0,
         "Quantity": 100,
         "Type": 0
       },
@@ -237,13 +259,16 @@ Content-Type: application/json;charset=UTF-8
         "Lenght": 2.5,
         "Width": 10
       },
-      "ListPrice": {
-        "CreatedOn": "2017-01-23T09:44:13.97",
-        "Amount": 10000,
-        "Currency": "BRL"
+      "Images": [
+        "http://www.myimages.com/image1.png",
+        "http://www.myimages.com/image2.png",
+        "http://www.myimages.com/image3.png"
+      ],
+      "Attributes": {
+        "cor": "vermelho", 
+        "tamanho": "médio" 
       },
-      "SellPrice": {
-        "CreatedOn": "2017-01-23T09:44:14.16",
+      "Price": {
         "Amount": 9000,
         "Currency": "BRL"
       }
@@ -263,8 +288,6 @@ Content-Type: application/json;charset=UTF-8
 
 ``` http
 GET /api/product/ HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 

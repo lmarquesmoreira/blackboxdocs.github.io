@@ -15,7 +15,7 @@ SKUs, ou *Stock Keeping Units*, representam uma variação específica do [produ
 -----------------------------------
 
 **Id**{:.custom-attrib}  `number`{:.custom-tag}  
-Identificador do SKU, gerado automáticamente durante a criação  
+Identificador do SKU (gerado automáticamente)  
 
 **Sku**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
 Valor do SKU  
@@ -28,6 +28,14 @@ Descrição do SKU
 
 **Images**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
 Array com até 8 URLs de imagens para o SKU  
+
+``` json
+[
+  "http://www.myimages.com/image1.png",
+  "http://www.myimages.com/image2.png",
+  "http://www.myimages.com/image3.png"
+]
+```
 
 **Attributes**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
 Conjunto de pares chave-valor para armazenar até 5 atributos ao SKU. Exemplo:  
@@ -132,29 +140,37 @@ productId: int  // id do produto
 
 ``` http
 POST /api/product/{productId}/sku HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
 ``` json
 {
   "Sku": "PROD9999",
-  "Name": "SKU COR AZUL",
   "Description": "Descrição do SKU de Produto",
+  "Inventory": {
     "Status": 0,
-    "Inventory": {
-      "Quantity": 10,
-      "Type": 0
-    },
-    "ListPrice": {
-      "Currency": "BRL",
-      "Amount" : 1000
-    },
-    "SellPrice": {
-      "Currency": "BRL",
-      "Amount" : 999
-    }
+    "Quantity": 10,
+    "Type": 0
+  },
+  "Dimensions": {
+    "Weight": 1.0,
+    "Height": 2.5,
+    "Lenght": 2.5,
+    "Width": 10
+  },
+  "Images": [
+    "http://www.myimages.com/image1.png",
+    "http://www.myimages.com/image2.png",
+    "http://www.myimages.com/image3.png"
+  ],
+  "Attributes": {
+    "cor": "vermelho",
+    "tamanho": "médio" 
+  },
+  "Price": {
+    "Currency": "BRL",
+    "Amount" : 9000
+  }
 }
 ```
 
@@ -194,24 +210,22 @@ skuId: int  // id do sku
 
 ``` http
 PUT /api/product/{productId}/sku/{skuId} HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
 ``` json
 {
-  "Sku": "PROD9999",
-  "Name": "SKU COR AZUL ESCURO",
-  "Description": "Nova descrição do sku do produto",
-  "ImageUrl": "http://path.to/skuimage.png",
-  "Status": 0,
+  "Description": "Nova descrição do SKU de Produto",
   "Dimensions": {
-      "Weight": 1.5,
-      "Height": 2.0,
-      "Lenght": 3.2,
-      "Width": 2.0
-    }
+    "Weight": 1.0,
+    "Height": 2.5,
+    "Lenght": null,
+    "Width": 10
+  },
+  "Attributes": {
+    "cor": "verde", 
+    "tamanho": "grande" 
+  } 
 }
 ```
 
@@ -251,8 +265,6 @@ skuId: int  // id do sku
 
 ``` http
 GET /api/product/{productId}/sku/{skuId} HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
@@ -264,32 +276,33 @@ Content-Type: application/json;charset=UTF-8
 ```
 ``` json
 {
-  "Id": 9999,
+  "Id": 9999999,
   "Sku": "PROD9999",
-  "CreatedOn": "2017-02-08T08:53:23.9112582",
-  "UpdatedOn": "2017-02-08T08:53:24.292862",
-  "Status": 0,
-  "Name": "SKU COR AZUL",
-  "Description": "Descrição do SKU de Produto",
+  "UpdatedOn": "2017-01-23T09:44:15.16",
+  "Description": "Descrição do item",
   "Inventory": {
-    "UpdatedOn": "2017-02-08T08:53:23.9112582",
-    "Quantity": 10,
+    "UpdatedOn": "2017-01-23T09:44:14.66",
+    "Status": 0,
+    "Quantity": 100,
     "Type": 0
   },
   "Dimensions": {
-      "Weight": 1.5,
-      "Height": 2.0,
-      "Lenght": 3.2,
-      "Width": 2.0
+    "Weight": 1.0,
+    "Height": 2.5,
+    "Lenght": 2.5,
+    "Width": 10
   },
-  "ListPrice": {
-    "CreatedOn": "2017-02-08T08:53:23.9112582",
-    "Amount": 1000,
-    "Currency": "BRL"
+  "Images": [
+    "http://www.myimages.com/image1.png",
+    "http://www.myimages.com/image2.png",
+    "http://www.myimages.com/image3.png"
+  ],
+  "Attributes": {
+    "cor": "vermelho", 
+    "tamanho": "médio" 
   },
-  "SellPrice": {
-    "CreatedOn": "2017-02-08T08:53:23.9112582",
-    "Amount": 999,
+  "Price": {
+    "Amount": 9000,
     "Currency": "BRL"
   }
 }
@@ -312,8 +325,6 @@ productId: int  // id do produto
 
 ``` http
 GET /api/product/{productId}/sku HTTP/1.1
-Host: {blackbox endpoint}
-Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
