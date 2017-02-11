@@ -344,3 +344,170 @@ Content-Type: application/json;charset=UTF-8
   
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
   
+<a name="put_inventory"></a>
+
+#### `PUT`{:.http-put} Atualização de estoque do SKU 
+-------------------------------------------
+  
+**PARÂMETROS:**  
+
+``` csharp
+productId: int  // id do produto
+skuId: int  // id do sku
+```
+
+**REQUEST:**  
+
+``` http
+PUT /api/product/{productId}/sku/{skuId}/inventory HTTP/1.1
+Content-Type: application/json
+```
+
+``` json
+{
+  "Status": 0,
+  "Quantity": 100,
+  "Type": 0
+}
+```
+
+**RESPONSE:**  
+
+``` http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+```
+``` json
+{
+  "Id": 999999,
+  "Links": {
+    "self": {
+      "href": "/api/product/9999/sku/999999",
+      "method": "GET"
+    }
+  }
+}
+```
+  
+<a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
+  
+    
+<a name="get_inventory"></a>
+
+#### `GET`{:.http-get} Obtenção de estoque do SKU 
+-------------------------------------------
+  
+**PARÂMETROS:**  
+
+``` csharp
+productId: int  // id do produto
+skuId: int  // id do sku
+```
+
+**REQUEST:**  
+
+``` http
+GET /api/product/{productId}/sku/{skuId}/inventory HTTP/1.1
+Content-Type: application/json
+```
+  
+
+**RESPONSE:**  
+
+``` http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+```
+``` json
+{
+  "Status": 0,
+  "Quantity": 100,
+  "Type": 0
+}
+```
+  
+<a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
+  
+    
+<a name="put_price"></a>
+
+#### `PUT`{:.http-put} Atualização do preço de venda do SKU 
+-------------------------------------------
+  
+**PARÂMETROS:**  
+
+``` csharp
+productId: int  // id do produto
+skuId: int  // id do sku
+```
+
+**REQUEST:**  
+
+``` http
+PUT /api/product/{productId}/sku/{skuId}/price HTTP/1.1
+Content-Type: application/json
+```
+
+``` json
+{
+  "Amount": 10000,
+  "Currency": "BRL"  
+}
+```
+
+**RESPONSE:**  
+
+``` http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+```
+``` json
+{
+  "Id": 999999,
+  "Links": {
+    "self": {
+      "href": "/api/product/9999/sku/999999",
+      "method": "GET"
+    }
+  }
+}
+```
+  
+<a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
+  
+    
+<a name="get_price"></a>
+
+#### `GET`{:.http-get} Obtenção do preço de venda do SKU 
+-------------------------------------------
+  
+**PARÂMETROS:**  
+
+``` csharp
+productId: int  // id do produto
+skuId: int  // id do sku
+```
+
+**REQUEST:**  
+
+``` http
+GET /api/product/{productId}/sku/{skuId}/price HTTP/1.1
+Content-Type: application/json
+```
+  
+
+**RESPONSE:**  
+
+``` http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+```
+``` json
+{
+  "Amount": 10000,
+  "Currency": "BRL"  
+}
+```
+  
+<a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
+  
