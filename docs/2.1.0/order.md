@@ -1,8 +1,8 @@
 ---
 layout: page-classic-sidebar-left
-title: SKU
-previous: /docs/2.1.0/product
-next: /docs/2.1.0/cart
+title: Pedido
+previous: /docs/2.1.0/cart
+next: 
 ---
 ---
 

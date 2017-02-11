@@ -5,3 +5,5 @@
 [Tokens de Autorização]({{ site.baseurl }}{% link docs/2.1.0/oauth.md %})  
 [Produto]({{ site.baseurl }}{% link docs/2.1.0/product.md %})  
 [SKU]({{ site.baseurl }}{% link docs/2.1.0/sku.md %})  
+[Carrinho de Compras]({{ site.baseurl }}{% link docs/2.1.0/cart.md %})  
+[Pedido]({{ site.baseurl }}{% link docs/2.1.0/order.md %})  

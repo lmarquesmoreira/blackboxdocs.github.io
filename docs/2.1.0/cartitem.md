@@ -1,12 +1,14 @@
 ---
 layout: page-classic-sidebar-left
-title: SKU
-previous: /docs/2.1.0/product
-next: /docs/2.1.0/cart
+title: Carrinho de Compras
+previous: /docs/2.1.0/sku
+next: /docs/2.1.0/order
 ---
 ---
 
-SKUs, ou *Stock Keeping Units*, representam uma variação específica do [produto]({{ site.baseurl }}{% link docs/2.1.0/product.md %}), como tamanho, cor ou sabor. Cada produto deve possuir ao menos um SKU antes de ser publicado.   
+Representa um carrinho de compras, e pode ser criado tanto pelo perfil `COMPRADOR`{:.custom-highlight}  como pelo perfil `VENDEDOR`{:.custom-highlight}. O carrinho de compras é composto por uma coleção não vazia de itens de carrinho.  
+
+Um item de carrinho agrega as informações do SKU, sua a quantidade, preço e o método de envio. 
 
   
 <a name="attributes"></a>
@@ -15,81 +17,51 @@ SKUs, ou *Stock Keeping Units*, representam uma variação específica do [produ
 -----------------------------------
 
 **Id**{:.custom-attrib}  `number`{:.custom-tag}  
-Identificador do SKU (gerado automáticamente)  
+Identificador do carrinho (gerado automáticamente)  
 
-**Sku**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
-Valor do SKU  
+**CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data de criação  
 
 **UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
 Data da última atualização  
 
-**Description**{:.custom-attrib}  `opcional`{:.custom-tag}  `512`{:.custom-tag}  `string`{:.custom-tag}  
-Descrição do SKU
-
-**Images**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
-Array com até 8 URLs de imagens para o SKU  
-
-``` json
-[
-  "http://www.myimages.com/image1.png",
-  "http://www.myimages.com/image2.png",
-  "http://www.myimages.com/image3.png"
-]
-```
-
-**Attributes**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
-Conjunto de pares chave-valor para armazenar até 5 atributos ao SKU. Exemplo:  
-
-``` json
-{
-  "cor": "vermelho", 
-  "tamanho": "médio" 
-}
-```
-  
-**Inventory.Status**{:.custom-attrib}  `number`{:.custom-tag}  
-Estado do SKU no estoque. Os valores possíveis são:  
+**UserId**{:.custom-attrib}  `36`{:.custom-tag}  `string`{:.custom-tag}  
+Identificador do usuário proprietário do carrinho  
 
 ``` javascript
- 0 // em estoque  
- 1 // fora de estoque  
- 2 // aceito sob demanda  
- 3 // descontinuado  
+ "99999999-9999-9999-9999-999999999999"
 ```
-  
 
-**Inventory.UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da última atualização do SKU no inventório
-
-**Inventory.Quantity**{:.custom-attrib}  `number`{:.custom-tag}  
-Quantidade de itens disponíveis no inventório  
-
-**Inventory.Type**{:.custom-attrib}  `number`{:.custom-tag}  
-Tipo de estoque. Os valores possíveis são:  
+**Type**{:.custom-attrib}  `number`{:.custom-tag}  
+Tipo de carrinho. Os valores possíveis são:  
 
 ``` javascript
- 0 // finito  
- 1 // infinito  
+ 0 // privado  
+ 1 // social  
+ 2 // oferta do vendedor  
 ```
   
 
-**Dimensions.Weight**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Peso do item (em gramas)  
+**MerchantId**{:.custom-attrib}  `opcional`{:.custom-tag}  `36`{:.custom-tag}  `string`{:.custom-tag}  
+Identificador da loja. Só é utilizado quando o tipo de carrinho for uma oferta do vendedor (`Type = 2`)     
 
-**Dimensions.Height**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Altura do item (em centímetros)  
+``` javascript
+ "99999999-9999-9999-9999-999999999999"
+```
 
-**Dimensions.Lenght**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Comprimento do item (em centímetros)  
+**Label**{:.custom-attrib}  `128`{:.custom-tag}  `string`{:.custom-tag}  
+Nome do carrinho  
+  
 
-**Dimensions.Width**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Largura do item  (em centímetros)  
+**CouponCode**{:.custom-attrib}  `opcional`{:.custom-tag}  `36`{:.custom-tag}  `string`{:.custom-tag}  
+Código de cupom de desconto     
+  
+**Permalink**{:.custom-attrib}  `string`{:.custom-tag}  
+Link de exibição do carrinho  
+  
 
-**Price.Amount**{:.custom-attrib}  `number`{:.custom-tag}  
-Valor em centavos do preço de venda. Exemplo: 150 (1,50)  
-
-**Price.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
-Código ISO 4217 da moeda utilizada no preço de venda. Exemplos: BRL, USD, EUR  
+**CartItems**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
+Lista de [Itens de Carrinho]({{ site.baseurl }}{% link docs/2.1.0/cartitem.md %})   
 
   
 <a style="float: right;" href="#attributes"><i class="fa fa-angle-double-up fa-fw"></i></a>
