@@ -49,7 +49,7 @@ Identificador da loja. Só é utilizado quando o tipo de carrinho for uma oferta
  "99999999-9999-9999-9999-999999999999"
 ```
 
-**Label**{:.custom-attrib}  `128`{:.custom-tag}  `string`{:.custom-tag}  
+**Label**{:.custom-attrib}  `opcional`{:.custom-tag}  `128`{:.custom-tag}  `string`{:.custom-tag}  
 Nome do carrinho  
   
 

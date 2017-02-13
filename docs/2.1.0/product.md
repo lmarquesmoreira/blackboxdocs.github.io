@@ -30,13 +30,13 @@ Identificador da loja
  "99999999-9999-9999-9999-999999999999"
 ```
 
-**Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
+**Name**{:.custom-attrib}  `128`{:.custom-tag}  `string`{:.custom-tag}  
 Nome do produto
 
-**Caption**{:.custom-attrib}  `128`{:.custom-tag}  `string`{:.custom-tag}  
+**Caption**{:.custom-attrib}  `opcional`{:.custom-tag}  `128`{:.custom-tag}  `string`{:.custom-tag}  
 Uma breve frase com a descrição do produto para exibição  
 
-**Description**{:.custom-attrib}  `1024`{:.custom-tag}  `string`{:.custom-tag}  
+**Description**{:.custom-attrib}  `opcional`{:.custom-tag}  `1024`{:.custom-tag}  `string`{:.custom-tag}  
 Descrição do produto  
 
 **Permalink**{:.custom-attrib}  `string`{:.custom-tag}  
@@ -46,6 +46,13 @@ Link de exibição do produto
 https://brasp.ag/product/9999
 ```
 
+**Ncm**{:.custom-attrib}  `opcional`{:.custom-tag}  `8`{:.custom-tag}  `string`{:.custom-tag}  
+Código NCM (Nomenclatura Comum do Mercosul). Exemplo:   
+
+```
+01021010
+```
+
 **IsEnabled**{:.custom-attrib}  `boolean`{:.custom-tag}  
 Flag que indica se produto está habilitado para publicação no marketplace  
 
@@ -53,7 +60,11 @@ Flag que indica se produto está habilitado para publicação no marketplace
 SKU padrão para exibição na *user interface*  
 
 **Metadata**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
-Conjunto de pares chave-valor para armazenar informações adicionais sobre o produto  
+Conjunto de pares chave-valor para armazenar informações adicionais sobre o produto.  
+
+``` javascript
+// O limite máximo de armazenamento é de 1024 caracteres 
+```
 
 ``` json
 {

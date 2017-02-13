@@ -23,7 +23,7 @@ Valor do SKU
 **UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
 Data da última atualização  
 
-**Description**{:.custom-attrib}  `opcional`{:.custom-tag}  `512`{:.custom-tag}  `string`{:.custom-tag}  
+**Description**{:.custom-attrib}  `opcional`{:.custom-tag}  `1024`{:.custom-tag}  `string`{:.custom-tag}  
 Descrição do SKU
 
 **Images**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  

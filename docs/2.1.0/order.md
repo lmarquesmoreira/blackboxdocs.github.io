@@ -6,7 +6,7 @@ next:
 ---
 ---
 
-SKUs, ou *Stock Keeping Units*, representam uma variação específica do [produto]({{ site.baseurl }}{% link docs/2.1.0/product.md %}), como tamanho, cor ou sabor. Cada produto deve possuir ao menos um SKU antes de ser publicado.   
+Pedidos são criados a partir do checkout de um carrinho de compras. Um pedido é composto por ao menos um item de pedido.  
 
   
 <a name="attributes"></a>
@@ -15,81 +15,66 @@ SKUs, ou *Stock Keeping Units*, representam uma variação específica do [produ
 -----------------------------------
 
 **Id**{:.custom-attrib}  `number`{:.custom-tag}  
-Identificador do SKU (gerado automáticamente)  
+Identificador do pedido (gerado automáticamente)  
 
-**Sku**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
-Valor do SKU  
+**CreatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
+Data da criação  
 
-**UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da última atualização  
-
-**Description**{:.custom-attrib}  `opcional`{:.custom-tag}  `512`{:.custom-tag}  `string`{:.custom-tag}  
-Descrição do SKU
-
-**Images**{:.custom-attrib}  `opcional`{:.custom-tag}  `array`{:.custom-tag}  
-Array com até 8 URLs de imagens para o SKU  
-
-``` json
-[
-  "http://www.myimages.com/image1.png",
-  "http://www.myimages.com/image2.png",
-  "http://www.myimages.com/image3.png"
-]
-```
-
-**Attributes**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
-Conjunto de pares chave-valor para armazenar até 5 atributos ao SKU. Exemplo:  
-
-``` json
-{
-  "cor": "vermelho", 
-  "tamanho": "médio" 
-}
-```
-  
-**Inventory.Status**{:.custom-attrib}  `number`{:.custom-tag}  
-Estado do SKU no estoque. Os valores possíveis são:  
+**Status.Code**{:.custom-attrib}  `number`{:.custom-tag}  
+Estado atual do pedido. Os valores possíveis são:  
 
 ``` javascript
- 0 // em estoque  
- 1 // fora de estoque  
- 2 // aceito sob demanda  
- 3 // descontinuado  
+ 0 // criado  
+ 1 // pagamento pendente  
+ 2 // pagamento confirmado  
+ 10 // enviado  
+ 20 // cancelado  
+ 30 // entregue  
 ```
   
-
-**Inventory.UpdatedOn**{:.custom-attrib}  `datetime`{:.custom-tag}  
-Data da última atualização do SKU no inventório
-
-**Inventory.Quantity**{:.custom-attrib}  `number`{:.custom-tag}  
-Quantidade de itens disponíveis no inventório  
-
-**Inventory.Type**{:.custom-attrib}  `number`{:.custom-tag}  
-Tipo de estoque. Os valores possíveis são:  
+**Customer.UserId**{:.custom-attrib}  `36`{:.custom-tag}  `string`{:.custom-tag}  
+Identificador do usuário proprietário do carrinho  
 
 ``` javascript
- 0 // finito  
- 1 // infinito  
+ "99999999-9999-9999-9999-999999999999"
+```
+
+**Customer.Name**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
+Nome completo do comprador  
+
+**Customer.Email**{:.custom-attrib}  `256`{:.custom-tag}  `string`{:.custom-tag}  
+Endereço de e-mail do comprador  
+
+**Customer.IpAddress**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
+Endereço IPv4 do comprador  
+
+**Shipping.Type**{:.custom-attrib}  `32`{:.custom-tag}  `string`{:.custom-tag}  
+Método de envio (frete)   
+
+**Shipping.Price**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
+Custo do método de envio  
+
+**Shipping.Address**{:.custom-attrib}  `opcional`{:.custom-tag}  `object`{:.custom-tag}  
+Endereço de entrega do pedido  
+
+**Payment.Type**{:.custom-attrib}  `number`{:.custom-tag}  
+Código do meio de pagamento utilizado. Os valores possíveis são:  
+
+``` javascript
+ 0 // cartão de crédito  
+ 1 // cartão de débito  
 ```
   
+**Payment.Object**{:.custom-attrib}  `object`{:.custom-tag}  
+Dados do meio de pagamento utilizado  
+  
 
-**Dimensions.Weight**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Peso do item (em gramas)  
+**Device.Id**{:.custom-attrib}  `opcional`{:.custom-tag}  `36`{:.custom-tag}  `string`{:.custom-tag}  
+Identificador do dispositivo acionador. Só é utilizado quando o pedido for gerado a partir de um dispositivo IoT  
+  
 
-**Dimensions.Height**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Altura do item (em centímetros)  
-
-**Dimensions.Lenght**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Comprimento do item (em centímetros)  
-
-**Dimensions.Width**{:.custom-attrib}  `opcional`{:.custom-tag}  `number`{:.custom-tag}  
-Largura do item  (em centímetros)  
-
-**Price.Amount**{:.custom-attrib}  `number`{:.custom-tag}  
-Valor em centavos do preço de venda. Exemplo: 150 (1,50)  
-
-**Price.Currency**{:.custom-attrib}  `string`{:.custom-tag}  
-Código ISO 4217 da moeda utilizada no preço de venda. Exemplos: BRL, USD, EUR  
+**OrderItems**{:.custom-attrib}  `array`{:.custom-tag}  
+Coleção de itens que compõem o pedido  
 
   
 <a style="float: right;" href="#attributes"><i class="fa fa-angle-double-up fa-fw"></i></a>
